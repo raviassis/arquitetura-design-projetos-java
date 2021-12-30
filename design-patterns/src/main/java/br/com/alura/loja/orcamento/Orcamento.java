@@ -9,4 +9,6 @@ import java.math.BigDecimal;
 public class Orcamento {
     @Getter
     private BigDecimal valor;
+    @Getter
+    private int quantidadeItens;
 }
