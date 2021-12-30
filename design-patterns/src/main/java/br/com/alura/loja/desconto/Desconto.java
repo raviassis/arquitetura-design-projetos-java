@@ -9,7 +9,12 @@ public abstract class Desconto {
     protected Desconto proximo;
 
     public Desconto setProximo(Desconto proximo) {
-        return this.proximo = proximo;
+        if (this.proximo == null) {
+            this.proximo = proximo;
+        } else {
+            this.proximo.setProximo(proximo);
+        }
+        return this;
     }
 
     public abstract BigDecimal calcular(Orcamento orcamento);
