@@ -17,5 +17,14 @@ public abstract class Desconto {
         return this;
     }
 
-    public abstract BigDecimal calcular(Orcamento orcamento);
+    // pattern template method
+    public BigDecimal calcular(Orcamento orcamento) {
+        if (deveAplicar(orcamento))
+            return efetuarCalculo(orcamento);
+        return this.proximo.calcular(orcamento);
+    }
+
+    // abstract steps for template method
+    protected abstract boolean deveAplicar(Orcamento orcamento);
+    protected abstract BigDecimal efetuarCalculo(Orcamento orcamento);
 }

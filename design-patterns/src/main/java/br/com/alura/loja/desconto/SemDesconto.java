@@ -6,8 +6,13 @@ import java.math.BigDecimal;
 
 // handler do padrão chain of responsability
 public class SemDesconto extends Desconto {
+    @Override
+    protected boolean deveAplicar(Orcamento orcamento) {
+        return true;
+    }
 
-    public BigDecimal calcular(Orcamento orcamento) {
+    @Override
+    protected BigDecimal efetuarCalculo(Orcamento orcamento) {
         return BigDecimal.ZERO;
     }
 }
