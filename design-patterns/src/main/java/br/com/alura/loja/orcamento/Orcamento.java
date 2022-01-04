@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@AllArgsConstructor
 public class Orcamento {
     @Getter
     private BigDecimal valor;
@@ -18,6 +17,11 @@ public class Orcamento {
     @Getter
     @Setter
     private SituacaoOrcamento situacao = new EmAnalise();
+
+    public Orcamento(BigDecimal valor, int quantidadeItens) {
+        this.valor = valor;
+        this.quantidadeItens = quantidadeItens;
+    }
 
     public void aplicarDescontoExtra(){
         var valorDescontoExtra = this.situacao.calcularDescontoExtra(this);
