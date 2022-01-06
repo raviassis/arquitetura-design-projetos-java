@@ -1,7 +1,7 @@
 package br.com.alura.loja.orcamento;
 
-import br.com.alura.loja.http.HttpAdapter;
 import br.com.alura.loja.DomainException;
+import br.com.alura.loja.http.HttpAdapter;
 import lombok.AllArgsConstructor;
 
 import java.util.Map;

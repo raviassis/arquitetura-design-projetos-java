@@ -4,7 +4,21 @@ import br.com.alura.loja.orcamento.Orcamento;
 
 import java.math.BigDecimal;
 
-// interface para o padrão strategy
-public interface Imposto {
-    BigDecimal calcular(Orcamento orcamento);
+// Aplicando o padrão decorator
+public abstract class Imposto {
+    private Imposto outro;
+
+    public Imposto(Imposto outro) {
+        this.outro = outro;
+    }
+
+    protected abstract BigDecimal realizarCalculo(Orcamento orcamento);
+
+    public BigDecimal calcular(Orcamento orcamento) {
+        var valorImposto = this.realizarCalculo(orcamento);
+        if(this.outro != null) {
+            valorImposto = valorImposto.add(this.outro.realizarCalculo(orcamento));
+        }
+        return valorImposto;
+    }
 }
