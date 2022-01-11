@@ -12,7 +12,8 @@ public class GeraPedidoHandler {
     private List<AcaoAposGerarPedido> acoes;
 
     public void executa(GeraPedido command) {
-        var orcamento = new Orcamento(command.getValorOrcamento(), command.getQuantidadeItens());
+        var orcamento = new Orcamento();
+        command.getItens().forEach(i -> orcamento.adicionarItem(i));
         var pedido = new Pedido(command.getCliente(), LocalDateTime.now(), orcamento);
         for (var acao: acoes) {
             acao.executar(pedido);
