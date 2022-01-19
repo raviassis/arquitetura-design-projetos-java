@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Orcamento implements Orcavel {
-    @Getter
+
     private BigDecimal valor = BigDecimal.ZERO;
 
     private List<Orcavel> itens = new ArrayList<>();
@@ -48,5 +48,16 @@ public class Orcamento implements Orcavel {
 
     public boolean isFinalizado() {
         return this.situacao instanceof Finalizado;
+    }
+
+
+    @Override
+    public BigDecimal getValor() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return this.valor;
     }
 }
