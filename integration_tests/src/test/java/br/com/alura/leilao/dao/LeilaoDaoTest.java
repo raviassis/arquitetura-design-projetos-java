@@ -3,6 +3,8 @@ package br.com.alura.leilao.dao;
 import br.com.alura.leilao.model.Leilao;
 import br.com.alura.leilao.model.Usuario;
 import br.com.alura.leilao.util.JPAUtil;
+import br.com.alura.leilao.util.builder.LeilaoBuilder;
+import br.com.alura.leilao.util.builder.UsuarioBuilder;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,9 +34,18 @@ class LeilaoDaoTest {
 
 	@Test
 	void deveriaCadastrarUmLeilao() {
-		Usuario usuario = new Usuario("fulano", "fulano@email.com", "12345678");
-		Leilao leilao = new Leilao("Mochila", new BigDecimal("70"), LocalDate.now(), usuario);
-		this.em.persist(usuario);
+		Leilao leilao = new LeilaoBuilder()
+							.comNome("Mochila")
+							.comValorInicial(new BigDecimal("500"))
+							.comUsuario(
+								new UsuarioBuilder()
+									.comNome("fulano")
+									.comEmail("fulano@email.com")
+									.comPassword("12345678")
+									.criar()
+							)
+							.criar();
+		this.em.persist(leilao.getUsuario());
 		leilao = dao.salvar(leilao);
 
 		leilao.setNome("Celular");

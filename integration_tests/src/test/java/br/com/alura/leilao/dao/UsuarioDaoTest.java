@@ -3,6 +3,7 @@ package br.com.alura.leilao.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
+import br.com.alura.leilao.util.builder.UsuarioBuilder;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -31,8 +32,11 @@ class UsuarioDaoTest {
 
 	@Test
 	void deveriaEncontrarUsuarioCadastrado() {
-		
-		Usuario usuario = new Usuario("fulano", "fulano@email.com", "12345678");
+		Usuario usuario = new UsuarioBuilder()
+							.comNome("fulano")
+							.comEmail("fulano@email.com")
+							.comPassword("12345678")
+							.criar();
 
 		em.persist(usuario);
 		
@@ -49,7 +53,11 @@ class UsuarioDaoTest {
 
 	@Test
 	void deveriaRemoverUsuario() {
-		Usuario usuario = new Usuario("fulano", "fulano@email.com", "12345678");
+		Usuario usuario = new UsuarioBuilder()
+				.comNome("fulano")
+				.comEmail("fulano@email.com")
+				.comPassword("12345678")
+				.criar();
 		em.persist(usuario);
 		this.dao.deletar(usuario);
 		Assert.assertThrows(NoResultException.class, () -> this.dao.buscarPorUsername(usuario.getNome()));
